@@ -36,7 +36,7 @@ const Hero = () => {
           <h2 className="hero-subtitle">{profile.role}</h2>
           <p className="hero-description">
             Computer Science graduate with expertise in software development, 
-            cybersecurity, and business leadership. Building innovative technology 
+            Web or App development and business leadership. Building innovative technology 
             solutions that bridge the gap between engineering and business strategy.
           </p>
           <div className="hero-buttons">
