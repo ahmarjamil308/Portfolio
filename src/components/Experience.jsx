@@ -7,7 +7,7 @@ const Experience = () => {
       <div className="section-container">
         <h2 className="section-title">Experience</h2>
         <div className="experience-timeline">
-          <div className="experience-item">
+          {/* <div className="experience-item">
             <div className="experience-header">
               <h3>Co-Founder & COO</h3>
               <span className="company">ByteShift</span>
@@ -17,7 +17,7 @@ const Experience = () => {
               Leading strategic operations, product development, and business growth. 
               Overseeing cross-functional teams and driving innovation in software solutions.
             </p>
-          </div>
+          </div> */}
           <div className="experience-item">
             <div className="experience-header">
               <h3>Python developer</h3>
