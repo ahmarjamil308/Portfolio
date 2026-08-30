@@ -21,10 +21,8 @@ const About = () => {
               development  has shaped me into a versatile technology professional.
             </p>
             <p className={isVisible ? 'animate-on-scroll visible delay-1' : 'animate-on-scroll delay-1'}>
-              As the <strong>{profile.role}</strong>, I bridge the gap between technical 
-              excellence and business strategy. My journey spans across software engineering, where I've 
-              worked with technologies like React, Node.js, Django, and Flutter, 
-              where I apply security principles to build robust and secure applications.
+              I bridge the gap between technical excellence and business strategy. My journey spans across software engineering, where I've worked with technologies like React, Node.js, Django, and Flutter. I combine my technical expertise with strong security principles to build robust, scalable, and secure applications.
+
             </p>
             <p className={isVisible ? 'animate-on-scroll visible delay-2' : 'animate-on-scroll delay-2'}>
               I believe in creating technology that makes a difference. Whether it's developing 
