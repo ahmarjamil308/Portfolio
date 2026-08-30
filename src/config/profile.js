@@ -1,7 +1,7 @@
 // src/config/profile.js
 const profile = {
   name: "Ahmar Jamil",
-  role: "Co-Founder & COO at ByteShift",
+  // role: "Co-Founder & COO at ByteShift",
   education: "BS Computer Science — Riphah International University",
   
   website: "https://ahmarjamil.com",
