@@ -1,17 +1,55 @@
-
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
   ArrowDownRight,
   ArrowUpRight,
   Github,
   Linkedin,
+  Sparkles,
+  Terminal,
+  Code
 } from 'lucide-react';
 import profile from '../config/profile';
+import Hero3DVisual from './Hero3DVisual';
+
+const roles = [
+  'Software Developer',
+  'Full-Stack Web Architect',
+  'Flutter Mobile Specialist',
+  'Problem Solver & Engineer'
+];
 
 export default function Hero() {
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [text, setText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [typingSpeed, setTypingSpeed] = useState(110);
+
+  // Dynamic typewriter effect
+  useEffect(() => {
+    const currentFullText = roles[roleIndex];
+
+    const timer = setTimeout(() => {
+      if (!isDeleting) {
+        setText(currentFullText.substring(0, text.length + 1));
+        if (text === currentFullText) {
+          setTimeout(() => setIsDeleting(true), 1800);
+        }
+      } else {
+        setText(currentFullText.substring(0, text.length - 1));
+        if (text === '') {
+          setIsDeleting(false);
+          setRoleIndex((prev) => (prev + 1) % roles.length);
+        }
+      }
+    }, isDeleting ? 45 : typingSpeed);
+
+    return () => clearTimeout(timer);
+  }, [text, isDeleting, roleIndex, typingSpeed]);
+
   return (
     <section className="hero section-wrap" id="home">
-      {/* Hero Text */}
+      {/* Hero Copy / Left Column */}
       <div className="hero-copy">
         <motion.div
           className="eyebrow"
@@ -19,8 +57,9 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <span className="status-dot" />
-          AVAILABLE FOR OPPORTUNITIES
+          <span className="status-dot-pulse" />
+          <span className="eyebrow-text">AVAILABLE FOR OPPORTUNITIES</span>
+          <Sparkles size={13} className="sparkle-icon" />
         </motion.div>
 
         <motion.p
@@ -37,15 +76,28 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.7 }}
         >
-          Ahmar <span>Jamil</span><b>.</b>
+          Ahmar <span className="gradient-text">Jamil</span>
+          <b className="period-accent">.</b>
         </motion.h1>
+
+        {/* Dynamic Interactive Role Typing */}
+        <motion.div
+          className="hero-role-badge"
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.28 }}
+        >
+          <Terminal size={18} className="role-icon" />
+          <span className="typewriter-text">{text}</span>
+          <span className="typewriter-cursor">_</span>
+        </motion.div>
 
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
+          transition={{ delay: 0.35 }}
         >
-          I build digital <em>experiences.</em>
+          Transforming bold ideas into <em>high-impact software.</em>
         </motion.h2>
 
         <motion.p
@@ -54,26 +106,34 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.45 }}
         >
-          Computer Science graduate and software developer
-          crafting thoughtful web applications, mobile
-          experiences, and practical digital solutions.
+          Computer Science graduate from <strong>Riphah International University</strong>.
+          I engineer ultra-fast web applications, cross-platform mobile apps with Flutter,
+          and robust systems with clean, scalable code.
         </motion.p>
 
+        {/* Action Buttons */}
         <motion.div
           className="hero-actions"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.55 }}
         >
-          <a className="button button-primary" href="#projects">
-            Explore my work <ArrowUpRight size={17} />
+          <a
+            className="button button-primary glow-btn"
+            href="#projects"
+          >
+            <span>Explore My Work</span> <ArrowUpRight size={17} />
           </a>
 
-          <a className="button button-ghost" href="#contact">
-            Get in touch <ArrowDownRight size={17} />
+          <a
+            className="button button-ghost"
+            href="#contact"
+          >
+            <span>Get in Touch</span> <ArrowDownRight size={17} />
           </a>
         </motion.div>
 
+        {/* Social Links & Location */}
         <div className="hero-socials">
           <a
             href={profile.social.github}
@@ -93,61 +153,41 @@ export default function Hero() {
             <Linkedin size={19} />
           </a>
 
-          <span>Pakistan · Working worldwide</span>
+          <div className="location-pill">
+            <span className="loc-indicator" />
+            <span>Pakistan · Working Worldwide</span>
+          </div>
+        </div>
+
+        {/* Quick Micro Tech Ribbon */}
+        <div className="hero-tech-ribbon">
+          <span><Code size={13} /> STACK</span>
+          <div className="ribbon-tags">
+            <span>React</span>
+            <span>Node.js</span>
+            <span>Flutter</span>
+            <span>Python</span>
+            <span>Three.js</span>
+          </div>
         </div>
       </div>
 
-      {/* Animated Profile Image */}
+      {/* 3D Interactive Visual / Centerpiece */}
       <motion.div
-        className="hero-visual"
-        initial={{ opacity: 0, scale: 0.82, rotate: -7 }}
-        animate={{ opacity: 1, scale: 1, rotate: 0 }}
-        transition={{
-          duration: 1,
-          delay: 0.25,
-          ease: 'easeOut',
-        }}
+        className="hero-visual-column"
+        initial={{ opacity: 0, scale: 0.85 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.9, delay: 0.2 }}
       >
-        <div className="visual-grid" />
-
-        {/* 3D Orbit Rings */}
-        <div className="orbit orbit-one" />
-        <div className="orbit orbit-two" />
-        <div className="orbit orbit-three" />
-
-        {/* Your Picture */}
-        <div className="profile-photo-frame">
-          <img
-            src="/images/ahmar-jamil.jpg"
-            alt="Ahmar Jamil - Software Developer"
-            className="profile-image"
-          />
-        </div>
-
-        {/* Floating Information Cards */}
-        <div className="floating-chip chip-code">
-          <span className="chip-symbol">{'</>'}</span>
-          <div>
-            <strong>Clean code</strong>
-            <small>Built with purpose</small>
-          </div>
-        </div>
-
-        <div className="floating-chip chip-stack">
-          <span className="chip-symbol">✳</span>
-          <div>
-            <strong>Full-stack</strong>
-            <small>Web & mobile</small>
-          </div>
-        </div>
-
-        <div className="visual-caption">
-          CREATIVE THINKING <span>×</span> ENGINEERING
-        </div>
+        <Hero3DVisual />
       </motion.div>
 
-      <a className="scroll-cue" href="#about">
-        <span /> Scroll to explore
+      {/* Scroll Cue */}
+      <a
+        className="scroll-cue"
+        href="#about"
+      >
+        <span className="cue-line" /> Scroll to explore
       </a>
     </section>
   );
